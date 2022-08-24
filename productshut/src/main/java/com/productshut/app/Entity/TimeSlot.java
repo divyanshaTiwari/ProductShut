@@ -22,18 +22,23 @@ public class TimeSlot {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "timeSlotId")
 	private int timeSlotId;
 	
-	@ManyToOne
-	@JoinColumn(name="empId", nullable=false)
-	private Employee empId;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="emp_id", nullable=false)
+	private Employee employee;
 	
+	@Column(name = "morning")
 	private boolean morning;
 	
+	@Column(name = "afternoon")
 	private boolean afternoon;
 	
+	@Column(name = "evening")
 	private boolean evening;
 	
+	@Column(name = "date")
 	private Date date;
 
 }

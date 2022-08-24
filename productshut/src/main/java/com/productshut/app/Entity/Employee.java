@@ -1,5 +1,7 @@
 package com.productshut.app.Entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -20,9 +22,17 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int empId;
 	
+	@Column(name = "empName")
 	private String empName;
 	
+	@Column(name = "phoneNo")
 	private String phoneNo;
+	
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+	private Order order;
+	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<TimeSlot> timeSlots;
 
 	/**
 	 * @return the empId
