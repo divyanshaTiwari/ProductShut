@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!------<title> Website Layout | CodingLab</title>------>
+    <!-- <link rel="stylesheet" href="homepage.component.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+   </head>
+<body>
+  <div [hidden]="homePageDisabled">
+  <nav style="background-color:white">
+    
+    <div class="menu">
+      <img src="assets/logo.jpg" style="width: 150px; height: 50px;">
+      <div class="logo">
+        <!-- <p class="logoImage">ProductShut</p> -->
+      </div>
+    
+    </div>
+  </nav>
+  
+  <div class="img"></div>
+  <div class="center">
+    <div class="title">Sell at amazing prices</div>
+    <div class="sub_title">Buy verified products</div>
+    <div class="btns">
+      <button (click)="login()">Login</button>
+      <button (click)="signUp()">Signup</button>
+    </div>
+  </div>
+</div>
+<div [hidden]="loginDisabled">
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid" alt="Phone image">
+      </div>
+      
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <div class="d-flex align-items-center mb-3 pb-1">
+          <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+
+          <span class="h1 fw-bold mb-0">ProductShut</span>
+        </div>
+
+        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log into your account</h5>
+        <form [formGroup]="loginForm" (ngSubmit)="customerLogin(loginForm)">
+          <!-- Email input -->
+          <span  id="emailHelp" class="form-text text-muted">
+            <small *ngIf ="loginForm.get('email').errors?.['required'] && loginForm.get('email').touched" style="color: red">
+            Email field is required
+            </small>
+            <small *ngIf ="loginForm.get('email').errors?.['noSpaceAllowed'] && loginForm.get('email').touched" style="color: red">
+              Email field should not contain spaces
+              </small>
+              <small *ngIf = "loginForm.get('email').errors?.['email'] && loginForm.get('email').touched" style="color: red">
+                Please use a valid email id
+              </small>
+          </span>
+          <div class="form-outline mb-4">
+            <input type="email" id="email" class="form-control form-control-lg" formControlName="email"/>
+            <label class="form-label" for="email">Email address</label>
+          </div>
+          <!-- Password input -->
+          <span  id="emailHelp" class="form-text text-muted">
+            <small *ngIf ="loginForm.get('password').errors?.['required'] && loginForm.get('password').touched" style="color: red">
+            Password field is required
+            </small>
+            <small *ngIf ="loginForm.get('password').errors?.['noSpaceAllowed'] && loginForm.get('password').touched" style="color: red">
+              Password field should not contain spaces
+              </small>
+          </span>
+          <div class="form-outline mb-4">
+            <input type="password" id="password" class="form-control form-control-lg" formControlName="password"/>
+            <label class="form-label" for="password">Password</label>
+          </div>
+
+          <!-- <div class="d-flex justify-content-around align-items-center mb-4"> -->
+            <!-- Checkbox -->
+            <!-- <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+              <label class="form-check-label" for="form1Example3"> Remember me </label>
+            </div>
+            <a href="#!">Forgot password?</a>
+          </div> -->
+
+          <!-- Submit button -->
+          <!-- <button type="submit" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button> -->
+
+                <div class="d-grid gap-2">
+                  <button type = "submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; height: 50px;" >Log In</button>
+                </div>
+                <div [hidden]="incorrectCredentials">
+                  <span>
+                    <small style="color:red;">Please check your credentials </small><small>Or Just </small><a href="/customerHomePage">Register</a>
+                  </span>
+                </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div [hidden]="signUpDisabled">
+<section class="vh-100" style="background-color: #eee; position: center; padding-left: 20px;">
+  <div class="container h-100" style="position: center; padding-left: 20px;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form class="mx-1 mx-md-4" [formGroup]="registerForm" (ngSubmit)="register(registerForm)">
+
+                  <span  id="emailHelp" class="form-text text-muted">
+                    <small *ngIf ="registerForm.get('name').errors?.['required'] && registerForm.get('name').touched" style="color: red">
+                    Name field is required
+                    </small>
+                    <!-- <small *ngIf ="registerForm.get('name').errors?.['minLength(4)'] && registerForm.get('name').touched" style="color: red">
+                      Name should have more than four characters
+                      </small> -->
+                      <small *ngIf ="registerForm.get('name').errors?.['pattern'] && registerForm.get('name').touched" style="color: red">
+                        Name should not contain numbers
+                        </small>
+                  </span>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="name" class="form-control" formControlName="name"/>
+                      <label class="form-label" for="name">Your Name</label>
+                    </div>
+                  </div>
+
+                  
+
+                  <span  id="emailHelp" class="form-text text-muted">
+                    <small *ngIf ="registerForm.get('email').errors?.['required'] && registerForm.get('email').touched" style="color: red">
+                    Email field is required
+                    </small>
+                    <small *ngIf ="registerForm.get('email').errors?.['noSpaceAllowed'] && registerForm.get('email').touched" style="color: red">
+                      Email field should not contain spaces
+                      </small>
+                      <small *ngIf = "registerForm.get('email').errors?.['email'] && registerForm.get('email').touched" style="color: red">
+                        Please use a valid email id
+                      </small>
+                  </span>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="email" class="form-control" formControlName="email"/>
+                      <label class="form-label" for="email">Your Email</label>
+                    </div>
+                  </div>
+
+                  
+                  <span  id="emailHelp" class="form-text text-muted">
+                    <small *ngIf ="registerForm.get('password').errors?.['required'] && registerForm.get('password').touched" style="color: red">
+                    Password field is required
+                    </small>
+                    <small *ngIf ="registerForm.get('password').errors?.['noSpaceAllowed'] && registerForm.get('password').touched" style="color: red">
+                      Password cannot contain spaces
+                      </small>
+                  </span>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="password" class="form-control" formControlName="password"/>
+                      <label class="form-label" for="password">Password</label>
+                    </div>
+                    
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="password" class="form-control" formControlName="confirmPassword"/>
+                      <label class="form-label" for="password">Repeat your password</label>
+                    </div>
+                    <small *ngIf ="registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched" style="color: red">
+                      Does not match with the password field
+                      </small>
+                  </div>
+
+                  <span  id="emailHelp" class="form-text text-muted">
+                    <small *ngIf ="registerForm.get('phoneNo').errors?.['required'] && registerForm.get('phoneNo').touched" style="color: red">
+                    Phone Number is required
+                    </small>
+                    <small *ngIf ="registerForm.get('phoneNo').errors?.['noSpaceAllowed'] && registerForm.get('phoneNo').touched" style="color: red">
+                      Phone Number  should not contain spaces
+                      </small>
+                      <small *ngIf ="registerForm.get('phoneNo').errors?.['pattern'] && registerForm.get('phoneNo').touched" style="color: red">
+                        Phone Number  should not contain alphabets or special characters
+                        </small>
+                  </span>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <!-- <i class="fas fa-key fa-lg me-3 fa-fw"></i> -->
+                    <i class="bi bi-telephone-fill fas me-3 fa-fw fa-lg"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="phoneNo" class="form-control" formControlName="phoneNo"/>
+                      <label class="form-label" for="phoneNo">Phone Number</label>
+                    </div>
+                    
+                  </div>
+
+                  <span  id="emailHelp" class="form-text text-muted">
+                    <small *ngIf ="registerForm.get('address').errors?.['required'] && registerForm.get('address').touched" style="color: red">
+                    Address field is required
+                    </small>
+                    <!-- <small *ngIf ="registerForm.get('address').errors?.['minLength'] && registerForm.get('address').touched" style="color: red">
+                      Address should have more than four characters
+                      </small> -->
+                  </span>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="bi bi-journal-check fas fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="address" class="form-control" formControlName="address"/>
+                      <label class="form-label" for="address">Address</label>
+                    </div>
+                    
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type = "submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; height: 50px;" 
+                    (mouseover)="checkP()"
+                    >Register</button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+</body>
+</html>

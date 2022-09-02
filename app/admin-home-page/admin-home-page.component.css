@@ -1,0 +1,9 @@
+.space {
+    width: 4px;
+    height: auto;
+    display: inline-block;
+  }
+
+.visited {
+    background-color : blue;
+}
